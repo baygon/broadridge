@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+
+import { PackageService } from './services/package.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +10,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'package-viewer';
+
+  private readonly packageService = inject(PackageService);
+
+  constructor() {
+    this.packageService.getPackages().subscribe((packages) => {
+      for (const pkg of packages) {
+        this.packageService.getDependencies(pkg.id).subscribe();
+      }
+    });
+  }
 }
