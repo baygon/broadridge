@@ -1,0 +1,10 @@
+<div class="package-list">
+  <div class="status" *ngIf="loading()">Loading</div>
+  <div class="status error" *ngIf="error()">{{ error() }}</div>
+  <ng-container *ngIf="!loading() && !error()">
+    <app-package-card
+      *ngFor="let pkg of packages()"
+      [package]="pkg"
+    ></app-package-card>
+  </ng-container>
+</div>

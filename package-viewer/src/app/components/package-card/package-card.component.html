@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header">
+    <ng-container *ngIf="scope()"
+      ><span class="scope">{{ scope() }}</span
+      >/</ng-container
+    ><span class="name">{{ nameWithoutScope() }}</span>
+  </div>
+  <div class="card-body">
+    <div class="downloads">
+      {{ package().weeklyDownloads | countFormat }} downloads
+    </div>
+    <div class="dependencies">
+      {{ package().dependencyCount | countFormat }}
+      {{ package().dependencyCount === 1 ? "dependency" : "dependencies" }}
+    </div>
+  </div>
+</div>
