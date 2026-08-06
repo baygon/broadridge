@@ -1,5 +1,9 @@
 <div class="card">
-  <div class="card-header">
+  <div
+    class="card-header"
+    [class.is-hovered]="isHovered()"
+    [class.is-dependency]="isDependency()"
+  >
     <ng-container *ngIf="scope()"
       ><span class="scope">{{ scope() }}</span
       >/</ng-container

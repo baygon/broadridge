@@ -5,6 +5,10 @@
     <app-package-card
       *ngFor="let pkg of packages()"
       [package]="pkg"
+      [isHovered]="hoveredId() === pkg.id"
+      [isDependency]="hoveredDependencyIds().includes(pkg.id)"
+      (mouseenter)="onCardEnter(pkg)"
+      (mouseleave)="onCardLeave()"
     ></app-package-card>
   </ng-container>
 </div>

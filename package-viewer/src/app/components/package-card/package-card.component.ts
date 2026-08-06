@@ -13,6 +13,8 @@ import { CountFormatPipe } from '../../pipes/count-format.pipe';
 })
 export class PackageCardComponent {
   readonly package = input.required<Package>();
+  readonly isHovered = input(false);
+  readonly isDependency = input(false);
 
   readonly scope = computed(() => {
     const id = this.package().id;
