@@ -1,39 +1,41 @@
-<div class="toolbar">
-  <input
-    #searchInput
-    type="search"
-    class="search"
-    placeholder="Search..."
-    [value]="search()"
-    (input)="search.set(searchInput.value)"
-  />
-  <button
-    type="button"
-    class="reload"
-    title="Reload packages"
-    [disabled]="loading()"
-    (click)="reload()"
-  >
-    Reload
-  </button>
-</div>
+<div class="viewer">
+  <div class="toolbar">
+    <input
+      #searchInput
+      type="search"
+      class="search"
+      placeholder="Search..."
+      [value]="search()"
+      (input)="search.set(searchInput.value)"
+    />
+    <button
+      type="button"
+      class="reload"
+      title="Reload packages"
+      [disabled]="loading()"
+      (click)="reload()"
+    >
+      Reload
+    </button>
+  </div>
 
-<div class="package-list">
-  @if (loading()) {
-    <div class="status">Loading</div>
-  } @else if (error()) {
-    <div class="status error">{{ error() }}</div>
-  } @else {
-    @for (pkg of filteredPackages(); track pkg.id) {
-      <app-package-card
-        [package]="pkg"
-        [isHovered]="hoveredId() === pkg.id"
-        [isDependency]="hoveredDependencyIds().includes(pkg.id)"
-        (mouseenter)="onCardEnter(pkg)"
-        (mouseleave)="onCardLeave()"
-      ></app-package-card>
-    } @empty {
-      <div class="status">No packages found</div>
+  <div class="package-list">
+    @if (loading()) {
+      <div class="status">Loading</div>
+    } @else if (error()) {
+      <div class="status error">{{ error() }}</div>
+    } @else {
+      @for (pkg of filteredPackages(); track pkg.id) {
+        <app-package-card
+          [package]="pkg"
+          [isHovered]="hoveredId() === pkg.id"
+          [isDependency]="hoveredDependencyIds().includes(pkg.id)"
+          (mouseenter)="onCardEnter(pkg)"
+          (mouseleave)="onCardLeave()"
+        ></app-package-card>
+      } @empty {
+        <div class="status">No packages found</div>
+      }
     }
-  }
+  </div>
 </div>

@@ -1,7 +1,6 @@
 .card {
   border: 1px solid #d0d0d0;
   border-radius: 4px;
-  padding: 0.75rem 1rem;
   background: #fff;
   box-sizing: border-box;
   height: 100%;
@@ -9,7 +8,10 @@
 
 .card-header {
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid #d0d0d0;
+  border-radius: 3px 3px 0 0;
 
   .scope {
     color: #e67e22;
@@ -26,8 +28,16 @@
 
 .card-body {
   font-size: 0.875rem;
-  color: #555;
+  padding: 0.75rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: 0.4rem;
+
+  .downloads {
+    color: #222;
+  }
+
+  .dependencies {
+    color: #888;
+  }
 }
