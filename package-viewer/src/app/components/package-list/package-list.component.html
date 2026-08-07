@@ -1,14 +1,30 @@
+<div class="toolbar">
+  <input
+    #searchInput
+    type="search"
+    class="search"
+    placeholder="Search..."
+    [value]="search()"
+    (input)="search.set(searchInput.value)"
+  />
+</div>
+
 <div class="package-list">
-  <div class="status" *ngIf="loading()">Loading</div>
-  <div class="status error" *ngIf="error()">{{ error() }}</div>
-  <ng-container *ngIf="!loading() && !error()">
-    <app-package-card
-      *ngFor="let pkg of packages()"
-      [package]="pkg"
-      [isHovered]="hoveredId() === pkg.id"
-      [isDependency]="hoveredDependencyIds().includes(pkg.id)"
-      (mouseenter)="onCardEnter(pkg)"
-      (mouseleave)="onCardLeave()"
-    ></app-package-card>
-  </ng-container>
+  @if (loading()) {
+    <div class="status">Loading</div>
+  } @else if (error()) {
+    <div class="status error">{{ error() }}</div>
+  } @else {
+    @for (pkg of filteredPackages(); track pkg.id) {
+      <app-package-card
+        [package]="pkg"
+        [isHovered]="hoveredId() === pkg.id"
+        [isDependency]="hoveredDependencyIds().includes(pkg.id)"
+        (mouseenter)="onCardEnter(pkg)"
+        (mouseleave)="onCardLeave()"
+      ></app-package-card>
+    } @empty {
+      <div class="status">No packages found</div>
+    }
+  }
 </div>

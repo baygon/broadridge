@@ -4,10 +4,11 @@
     [class.is-hovered]="isHovered()"
     [class.is-dependency]="isDependency()"
   >
-    <ng-container *ngIf="scope()"
-      ><span class="scope">{{ scope() }}</span
-      >/</ng-container
-    ><span class="name">{{ nameWithoutScope() }}</span>
+    @if (scope()) {
+      <span class="scope">{{ scope() }}</span
+      >/
+    }
+    <span class="name">{{ nameWithoutScope() }}</span>
   </div>
   <div class="card-body">
     <div class="downloads">

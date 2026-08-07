@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Subject, of, switchMap } from 'rxjs';
 
@@ -10,7 +9,7 @@ import { PackageCardComponent } from '../package-card/package-card.component';
 @Component({
   selector: 'app-package-list',
   standalone: true,
-  imports: [CommonModule, PackageCardComponent],
+  imports: [PackageCardComponent],
   templateUrl: './package-list.component.html',
   styleUrls: ['./package-list.component.scss'],
 })
@@ -21,6 +20,18 @@ export class PackageListComponent implements OnInit {
   readonly packages = signal<Package[]>([]);
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
+
+  //filter state
+  readonly search = signal('');
+  readonly filteredPackages = computed(() => {
+    const query = this.search().trim().toLowerCase();
+    if (!query) {
+      return this.packages();
+    }
+    return this.packages().filter((pkg) =>
+      pkg.id.toLowerCase().includes(query),
+    );
+  });
 
   //hover state
   private readonly hover$ = new Subject<string | null>();

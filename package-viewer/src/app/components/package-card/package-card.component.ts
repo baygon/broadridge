@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 
 import { Package } from '../../models/package.model';
@@ -7,7 +6,7 @@ import { CountFormatPipe } from '../../pipes/count-format.pipe';
 @Component({
   selector: 'app-package-card',
   standalone: true,
-  imports: [CommonModule, CountFormatPipe],
+  imports: [CountFormatPipe],
   templateUrl: './package-card.component.html',
   styleUrls: ['./package-card.component.scss'],
 })
