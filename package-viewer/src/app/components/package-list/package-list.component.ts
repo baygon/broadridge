@@ -59,7 +59,15 @@ export class PackageListComponent implements OnInit {
   }
 
   onCardLeave(): void {
+    this.hoveredDependencyIds.set([]);
     this.hover$.next(null);
+  }
+
+  reload(): void {
+    this.packageService.clearDependencyCache();
+    this.hover$.next(null);
+    this.search.set('');
+    this.loadPackages();
   }
 
   loadPackages(): void {

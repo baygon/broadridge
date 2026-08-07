@@ -7,6 +7,15 @@
     [value]="search()"
     (input)="search.set(searchInput.value)"
   />
+  <button
+    type="button"
+    class="reload"
+    title="Reload packages"
+    [disabled]="loading()"
+    (click)="reload()"
+  >
+    Reload
+  </button>
 </div>
 
 <div class="package-list">

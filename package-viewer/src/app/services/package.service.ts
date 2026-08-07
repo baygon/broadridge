@@ -11,9 +11,11 @@ export class PackageService {
   private readonly dependencyCache = new Map<string, string[]>();
 
   getPackages(): Observable<Package[]> {
-    return this.http
-      .get<Package[]>(this.baseUrl)
-      .pipe(tap((packages) => console.log('getPackages() response', packages)));
+    return this.http.get<Package[]>(this.baseUrl);
+  }
+
+  clearDependencyCache(): void {
+    this.dependencyCache.clear();
   }
 
   getDependencies(id: string): Observable<string[]> {
@@ -24,11 +26,6 @@ export class PackageService {
 
     return this.http
       .get<string[]>(`${this.baseUrl}/${encodeURIComponent(id)}/dependencies`)
-      .pipe(
-        tap((dependencies) => {
-          console.log('getDependencies() response', id, dependencies);
-          this.dependencyCache.set(id, dependencies);
-        }),
-      );
+      .pipe(tap((dependencies) => this.dependencyCache.set(id, dependencies)));
   }
 }
